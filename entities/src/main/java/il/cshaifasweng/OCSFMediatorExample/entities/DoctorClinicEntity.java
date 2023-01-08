@@ -17,6 +17,7 @@ public class DoctorClinicEntity implements Serializable {
     @JoinColumn(name = "clinic_id")
     ClinicEntity clinic;
 
+
     public ClinicEntity getClinic() {
         return clinic;
     }
