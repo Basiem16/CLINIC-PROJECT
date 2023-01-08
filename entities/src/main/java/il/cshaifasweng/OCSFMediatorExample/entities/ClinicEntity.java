@@ -96,4 +96,28 @@ public class ClinicEntity implements Serializable {
     public void updateManager(ManagerEntity manager){
         this.manager = manager;
     }
+
+    public List<NurseEntity> getNurses() {
+        return nurses;
+    }
+
+    public void setNurses(List<NurseEntity> nurses) {
+        this.nurses = nurses;
+    }
+
+    public DoctorClinicEntity getDoctorClinicEntities() {
+        return doctorClinicEntities;
+    }
+
+    public void setDoctorClinicEntities(DoctorClinicEntity doctorClinicEntities) {
+        this.doctorClinicEntities = doctorClinicEntities;
+    }
+
+    public List<AppointmentEntity> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<AppointmentEntity> appointments) {
+        this.appointments = appointments;
+    }
 }

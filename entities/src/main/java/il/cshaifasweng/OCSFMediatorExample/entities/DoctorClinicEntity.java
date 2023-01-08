@@ -1,14 +1,13 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class DoctorClinicEntity implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DoctorClinic_id")
     private int DoctorClinic_id;
     @OneToOne
     @JoinColumn(name = "doctor_id")
