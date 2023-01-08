@@ -1,9 +1,10 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
+import javax.persistence.MappedSuperclass;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-
+@MappedSuperclass
 public class UserEntity {
     private int id;
     String first_name;
@@ -71,5 +72,11 @@ public class UserEntity {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean comparePassword(String password)
+    {
+        boolean check = password.compareTo(this.getPassword()) == 0;
+        return check;
     }
 }
