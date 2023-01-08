@@ -1,15 +1,15 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "manager_entity")
 public class ManagerEntity extends UserEntity{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "manager_id")
     private int manager_id;
 
 
@@ -20,7 +20,7 @@ public class ManagerEntity extends UserEntity{
     public ManagerEntity(int id, String first_name, String family_name, String mail, String Password, ClinicEntity clinic) {
         super(id, first_name, family_name, mail, Password);
         this.manager_id = manager_id;
-        this.clinic = clinic;
+        setClinic(clinic);
     }
 
     public ManagerEntity() {
@@ -40,5 +40,6 @@ public class ManagerEntity extends UserEntity{
 
     public void setClinic(ClinicEntity clinic) {
         this.clinic = clinic;
+        clinic.updateManager(this);
     }
 }

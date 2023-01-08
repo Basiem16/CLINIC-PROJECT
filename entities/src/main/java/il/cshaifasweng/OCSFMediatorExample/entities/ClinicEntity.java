@@ -1,20 +1,46 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
+@Table(name = "Clinic")
 public class ClinicEntity implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Clinic_id")
     private int id;
     private String name;
     private  String open;
     private String close;
 
+
+    @OneToOne(mappedBy = "clinic", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private  ManagerEntity manager;
+
+    @OneToMany (mappedBy = "clinic")
     private List<PatientEntity> Patients;
+
+    @OneToMany(mappedBy = "clinic")
+    private List<NurseEntity> nurses;
+
+    @OneToOne(mappedBy = "clinic")
+    private DoctorClinicEntity doctorClinicEntities;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "clinic")
+    private List<AppointmentEntity> appointments;
+
+
+    public ManagerEntity getManager() {
+        return manager;
+    }
+
+    public void setManager(ManagerEntity manager) {
+        this.manager = manager;
+    }
 
     public ClinicEntity() {
     }
@@ -65,5 +91,9 @@ public class ClinicEntity implements Serializable {
 
     public void setPatients(List<PatientEntity> patients) {
         Patients = patients;
+    }
+
+    public void updateManager(ManagerEntity manager){
+        this.manager = manager;
     }
 }
