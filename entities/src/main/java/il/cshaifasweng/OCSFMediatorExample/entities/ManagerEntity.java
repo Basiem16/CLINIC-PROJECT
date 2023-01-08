@@ -12,6 +12,7 @@ public class ManagerEntity extends UserEntity{
     @Id
     private int manager_id;
 
+
     @OneToOne
     @JoinColumn(name = "clinic_id")
     private  ClinicEntity clinic;
