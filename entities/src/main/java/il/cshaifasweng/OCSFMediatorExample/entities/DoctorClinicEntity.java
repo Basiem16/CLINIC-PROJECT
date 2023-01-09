@@ -2,6 +2,9 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class DoctorClinicEntity implements Serializable {
@@ -9,7 +12,7 @@ public class DoctorClinicEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DoctorClinic_id")
     private int DoctorClinic_id;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
     DoctorEntity doctor;
     @OneToOne
@@ -42,7 +45,5 @@ public class DoctorClinicEntity implements Serializable {
         this.clinic = clinic;
 
     }
-
-
 
 }

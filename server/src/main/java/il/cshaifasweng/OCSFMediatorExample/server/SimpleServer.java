@@ -6,10 +6,9 @@ import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -19,9 +18,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
 public class SimpleServer extends AbstractServer {
 
@@ -29,6 +26,7 @@ public class SimpleServer extends AbstractServer {
 	private static List<ClinicEntity> Clinics;
 	private static List<PatientEntity> Patients ;
 	private static List<ManagerEntity> managers;
+	private static ArrayList<AppointmentEntity> doc_old_apps = new ArrayList<AppointmentEntity>();
 	public static ArrayList<AppointmentEntity> Appointments=new ArrayList<AppointmentEntity>();
 
 	public SimpleServer(int port) {
@@ -411,6 +409,29 @@ public class SimpleServer extends AbstractServer {
 		List<NurseEntity> result = session.createQuery(query).getResultList();
 		return result;
 	}
+
+	static <T> Predicate equal(CriteriaBuilder cb, Expression<T> left, T right) {
+		return cb.equal(left, right);
+	}
+
+	private static ManagerEntity get_manager_with_id(int id)  // get the manager with the given id from the database
+	{
+		try {
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<ManagerEntity> query = builder.createQuery(ManagerEntity.class);
+			Root<ManagerEntity> tmp = query.from(ManagerEntity.class);
+			query.select(tmp);
+			query.where(builder.equal(tmp.get("manager_id"),id));
+			TypedQuery<ManagerEntity> q = session.createQuery(query);
+			ManagerEntity manager = q.getSingleResult(); //getSingleResult();
+			return manager;
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 }
 

@@ -1,6 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,8 +13,8 @@ public class DoctorEntity extends UserEntity{
     @Column(name = "doctor_id")
     private int doctor_id;
 
-    @OneToOne(mappedBy = "doctor")
-    DoctorClinicEntity doctorClinicEntities;
+    @OneToMany(mappedBy = "doctor")
+    List<DoctorClinicEntity> doctorClinicEntities;
 
     @OneToMany(mappedBy = "doctor")
     List<DoctorPatientEntity> doctorPatientEntities;
@@ -21,10 +23,16 @@ public class DoctorEntity extends UserEntity{
     private List<AppointmentEntity> appointments;
 
 
-    public DoctorEntity(int id, String first_name, String family_name, String mail, String Password) {
+    public DoctorEntity(int id, String first_name, String family_name, String mail, String Password) throws NoSuchAlgorithmException {
         super(id, first_name, family_name, mail, Password);
+        initListAndSets();
 
+    }
 
+    private void initListAndSets(){
+        this.doctorClinicEntities = new ArrayList<DoctorClinicEntity>();
+        this.doctorPatientEntities = new ArrayList<DoctorPatientEntity>();
+        this.appointments = new ArrayList<AppointmentEntity>();
     }
 
     public DoctorEntity() {
@@ -39,11 +47,11 @@ public class DoctorEntity extends UserEntity{
         this.doctor_id = doctor_id;
     }
 
-    public DoctorClinicEntity getDoctorClinicEntities() {
+    public List<DoctorClinicEntity> getDoctorClinicEntities() {
         return doctorClinicEntities;
     }
 
-    public void setDoctorClinicEntities(DoctorClinicEntity doctorClinicEntities) {
+    public void setDoctorClinicEntities(List<DoctorClinicEntity> doctorClinicEntities) {
         this.doctorClinicEntities = doctorClinicEntities;
     }
 
