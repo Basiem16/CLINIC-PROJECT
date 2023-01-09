@@ -1,28 +1,27 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 public class AppointmentEntity implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "appointment_id")
     private int id;
     private LocalDateTime date; // date of appointment
     private LocalDateTime time; // time of appointment
     private boolean reserved = false;
     private int timeDuration;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "clinic_id")
     private ClinicEntity clinic;
-    @ManyToOne
-    @JoinColumn(name = "patient_patient_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient_id")
     private PatientEntity patient;
-    @ManyToOne
-    @JoinColumn(name = "doctor_doctor_id")
+    @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @JoinColumn(name = "doctor_id")
     private DoctorEntity doctor;
 
     public AppointmentEntity() {
