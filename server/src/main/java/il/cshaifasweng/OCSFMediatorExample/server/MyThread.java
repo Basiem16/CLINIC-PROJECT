@@ -34,7 +34,7 @@ public class MyThread extends Thread{
 
                 if((app.isReserved())&&(app.getPatient()!=null)&&(((now_date_mills.getTime()+day_1+30000)>app_time_in_mills))&&(now_date_mills.getTime()+day_1-30000)<(app_time_in_mills))
                 {
-                   // sending mails
+                  ///////// EmailUtil
                 }
             }
 
