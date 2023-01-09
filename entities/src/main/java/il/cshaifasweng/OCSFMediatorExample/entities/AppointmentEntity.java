@@ -29,6 +29,7 @@ public class AppointmentEntity implements Serializable {
     private DoctorEntity doctor;
 
 
+
     public AppointmentEntity() {
     }
 
