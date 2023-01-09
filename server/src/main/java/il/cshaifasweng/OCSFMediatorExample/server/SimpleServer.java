@@ -111,6 +111,8 @@ public class SimpleServer extends AbstractServer {
 			session.flush();
 			session.getTransaction().commit();
 
+			Appointments=(ArrayList<AppointmentEntity>) GetAllAppointments();
+
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
