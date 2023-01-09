@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "Appointmens")
 public class AppointmentEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,15 +15,19 @@ public class AppointmentEntity implements Serializable {
     private LocalDateTime time; // time of appointment
     private boolean reserved = false;
     private int timeDuration;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "clinic_id")
     private ClinicEntity clinic;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
     private PatientEntity patient;
+
     @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctor;
+
 
     public AppointmentEntity() {
     }
