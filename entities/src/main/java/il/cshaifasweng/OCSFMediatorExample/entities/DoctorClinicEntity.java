@@ -33,21 +33,16 @@ public class DoctorClinicEntity implements Serializable {
         this.doctor = doctor;
     }
 
-    String day_hours;
 
     public DoctorClinicEntity() {
     }
 
-    public DoctorClinicEntity(DoctorEntity doctor, ClinicEntity clinic, String day_hours) {
+    public DoctorClinicEntity(DoctorEntity doctor, ClinicEntity clinic) {
         this.doctor = doctor;
         this.clinic = clinic;
-        this.day_hours = day_hours;
+
     }
 
-    public String get_day_hours()
-    {
-        return day_hours;
-    }
 
 
 }

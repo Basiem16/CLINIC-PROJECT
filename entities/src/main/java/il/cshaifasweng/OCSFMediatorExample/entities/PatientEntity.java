@@ -29,10 +29,11 @@ public class PatientEntity extends UserEntity{
         this.clinic = clinic;
     }
 
-    public PatientEntity(int id, String first_name, String family_name, String mail, String Password, int patient_id) {
+    public PatientEntity(int id, String first_name, String family_name, String mail, String Password, ClinicEntity clinic) {
         super(id, first_name, family_name, mail, Password);
-        this.patient_id = patient_id;
+        this.patient_id = id;
         this.appointments = new ArrayList<AppointmentEntity>();
+        this.clinic=clinic;
     }
 
     public PatientEntity() {

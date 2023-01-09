@@ -24,6 +24,7 @@ public class DoctorEntity extends UserEntity{
     public DoctorEntity(int id, String first_name, String family_name, String mail, String Password) {
         super(id, first_name, family_name, mail, Password);
 
+
     }
 
     public DoctorEntity() {
