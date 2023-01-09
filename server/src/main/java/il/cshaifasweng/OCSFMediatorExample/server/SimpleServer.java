@@ -15,6 +15,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
 public class SimpleServer extends AbstractServer {
 
 	public static Session session;
@@ -142,6 +145,16 @@ public class SimpleServer extends AbstractServer {
 	}
 
 
+	public  static List<AppointmentEntity> GetAllAppointments(){
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<AppointmentEntity> query = builder.createQuery(AppointmentEntity.class);
+		query.from(AppointmentEntity.class);
+		List<AppointmentEntity> result = session.createQuery(query).getResultList();
+		return result;
+	}
+
+
+
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		String msgString = msg.toString();
@@ -153,11 +166,13 @@ public class SimpleServer extends AbstractServer {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}else if (msgString.startsWith("#CloseSession")) {
+		} else if (msgString.startsWith("#CloseSession")) {
 			stopSession();
 		}
+	}
 
 	}
 
 
-}
+
+
