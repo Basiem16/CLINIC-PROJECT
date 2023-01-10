@@ -29,14 +29,7 @@ public class SimpleServer extends AbstractServer {
 	private static ArrayList<AppointmentEntity> doc_old_apps = new ArrayList<AppointmentEntity>();
 	public static ArrayList<AppointmentEntity> Appointments=new ArrayList<AppointmentEntity>();
 
-	public SimpleServer(int port) {
-		super(port);
-		initSession();
-		MyThread myThread = new MyThread();
-		myThread.start();
 
-		
-	}
 
 	public void initSession() {
 		session = getSessionFactory().openSession();
@@ -83,6 +76,7 @@ public class SimpleServer extends AbstractServer {
 			NurseEntity nurse4 = new NurseEntity(1234564578, "Nurse", "4", "Nurse4@gmail.com", "Nurse2123", clinic4);
 			session.save(nurse4);
 
+
 			DoctorClinicEntity doctorClinic1 = new DoctorClinicEntity(doc1, clinic1);
 			session.save(doctorClinic1);
 			DoctorClinicEntity doctorClinic2 = new DoctorClinicEntity(doc2, clinic2);
@@ -121,6 +115,16 @@ public class SimpleServer extends AbstractServer {
 				session.getTransaction().rollback();
 			}
 		}
+	}
+
+
+	public SimpleServer(int port) {
+		super(port);
+		initSession();
+		MyThread myThread = new MyThread();
+		myThread.start();
+
+
 	}
 
 	public void stopSession() {
@@ -371,6 +375,38 @@ public class SimpleServer extends AbstractServer {
 		}
 		return null;
 	}
+
+	private static void UpdateAppointment(){
+		System.out.println("Update App");
+		LocalDateTime now = LocalDateTime.now();
+		now.getDayOfWeek();
+		List<DoctorEntity> all_docs=getALLDoctors();
+		for (DoctorEntity doc:all_docs){
+			List<DoctorClinicEntity> doc_clinics = doc.getDoctorClinicEntities();
+			List<AppointmentEntity> doc_appointments = doc.getAppointments();
+			for (AppointmentEntity app:doc_appointments){
+				if(app.getDate().isBefore(now)){
+					if (app.isReserved()){
+						doc_old_apps.add(app);
+					}
+					Appointments.remove(app);
+				}
+			}
+			LocalDateTime latest_appointment;
+			if (doc_appointments.size()>0){
+				doc_appointments.sort(Comparator.comparing(o -> o.getDate()));
+				latest_appointment=doc_appointments.get(doc_appointments.size()-1).getDate();
+				System.out.println(latest_appointment.toString());
+			}else {
+				latest_appointment = now;
+			}
+
+		}
+	}
+
+
+
+
 
 	<T extends UserEntity> boolean checkPassword(List<T> Users,UserEntity user,ConnectionToClient client){  // check if the entered username and password exists and correct
 		for (int i = 0 ; i < Users.size(); i++){
