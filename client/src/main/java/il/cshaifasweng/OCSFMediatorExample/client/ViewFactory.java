@@ -25,31 +25,26 @@ public class ViewFactory {
 
      public void showLoginWindow(){
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/il.cshaifasweng.OCSFMediatorExample.client/Login.fxml"));
-          Scene scene = null;
-          try {
-              scene = new Scene(loader.load());
-          } catch (Exception e) {
-              e.printStackTrace();
-          }
-         Stage stage = new Stage();
-          stage.setScene(scene);
-          stage.setTitle("Health Center");
-          stage.show();
+         createStage(loader);
      }
 
      public void showPatientWindow() {
          FXMLLoader loader = new FXMLLoader(getClass().getResource("/il.cshaifasweng.OCSFMediatorExample.client/Patient.fxml"));
          PatientController patientController = new PatientController();
          loader.setController(patientController);
-         Scene scene = null;
-         try {
-             scene = new Scene(loader.load());
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-         Stage stage = new Stage();
-         stage.setScene(scene);
-         stage.setTitle("Health Center");
-         stage.show();
+         createStage(loader);
      }
+
+    private void createStage(FXMLLoader loader) {
+        Scene scene = null;
+        try {
+            scene = new Scene(loader.load());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Health Center");
+        stage.show();
+    }
 }
