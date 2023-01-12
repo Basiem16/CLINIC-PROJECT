@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="login_form_container" stylesheets="@../../../../Styles/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShowAppController">
+    <Text fx:id="hello_user_lbl" layoutX="21.0" layoutY="42.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello User," AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="30.0" />
+    <Text layoutX="21.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Look at your appointments:" wrappingWidth="166.705078125" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="86.0" />
+    <Line endX="398.0" endY="124.5" startY="124.5" />
+    <VBox layoutX="35.0" layoutY="144.0" prefHeight="350.0" prefWidth="600.0" styleClass="login_form_container" stylesheets="@../../../../Styles/Login.css">
+        <TableView fx:id="apps_table" prefHeight="159.0" prefWidth="497.0">
+            <columns>
+                <TableColumn fx:id="app_id" prefWidth="104.0" text="Appointment id" />
+                <TableColumn fx:id="app_date" prefWidth="124.0" text="Date" />
+                <TableColumn fx:id="app_time" prefWidth="129.0" text="Time" />
+                <TableColumn fx:id="doc_name" prefWidth="118.0" text="Doctor Name" />
+                <TableColumn fx:id="app_clinic_location" prefWidth="124.0" text="Location" />
+            </columns>
+        </TableView>
+        <VBox prefHeight="145.0" prefWidth="167.0" styleClass="reload_container" stylesheets="@../../../../Styles/PatientMenu.css">
+            <children>
+                <Button fx:id="confirm_app_btn" mnemonicParsing="false" text="Confirm" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Press Confrim to remove appointment" />
+                <Text fx:id="app_status_txt" strokeType="OUTSIDE" strokeWidth="0.0" text="SUCCESS" />
+            </children>
+        </VBox>
+    </VBox>
+</AnchorPane>

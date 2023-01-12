@@ -52,6 +52,11 @@
     -fx-font-size: 1.1em;
     -fx-font-weight: regular;
 }
+.login_form2_container {
+    -fx-spacing: 5;
+    -fx-alignment: top_left;
+}
+
 
 
 .input_field {

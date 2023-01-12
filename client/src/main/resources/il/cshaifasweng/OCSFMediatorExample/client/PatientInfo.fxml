@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="login_form_container" stylesheets="@../../../../Styles/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PatientInfoController">
+    <Text fx:id="hello_user_lbl" layoutX="21.0" layoutY="42.94921875" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello User," AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="30.0" />
+    <Text layoutX="21.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Look at your Info:" wrappingWidth="166.705078125" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="86.0" />
+    <Line endX="398.0" endY="124.5" startY="124.5" />
+    <VBox layoutX="35.0" layoutY="144.0" prefHeight="350.0" prefWidth="83.0" styleClass="login_form_container" stylesheets="@../../../../Styles/Login.css">
+        <opaqueInsets>
+            <Insets />
+        </opaqueInsets>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" />
+        <Text fx:id="app_status_txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Clinic:" />
+    </VBox>
+    <VBox layoutX="149.0" layoutY="144.0" prefHeight="350.0" prefWidth="117.0" styleClass="login_form2_container">
+        <children>
+          <TextField fx:id="firstName_txt" />
+          <TextField fx:id="lastName_txt" />
+          <TextField fx:id="email_txt" />
+          <TextField fx:id="clinic_name_txt" />
+        </children>
+    </VBox>
+</AnchorPane>
