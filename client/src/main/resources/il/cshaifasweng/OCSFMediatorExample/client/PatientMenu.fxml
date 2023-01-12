@@ -9,57 +9,51 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <AnchorPane prefHeight="730.0" prefWidth="160.0">
-         <children>
-            <VBox prefHeight="80.0" prefWidth="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <FontAwesomeIconView glyphName="AMBULANCE" size="30" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-               </children>
-            </VBox>
-            <VBox prefHeight="400.0" prefWidth="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Make an Appoinment">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="" size="20" />
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" text="My Appoinments">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="ADDRESS_BOOK_ALT" size="20" />
-                     </graphic>
-                  </Button>
-                  <Line endX="150.0" />
-                  <Button mnemonicParsing="false" text="Profile">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="USER" size="20" />
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" text="Log Out">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="EXTERNAL_LINK" size="20" />
-                     </graphic>
-                  </Button>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </VBox>
-            <VBox layoutX="10.0" layoutY="602.0" prefHeight="120.0" prefWidth="130.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Want to reload?" />
-                  <Label text="Use this to reload page." />
-                  <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="86.0" text="Reload">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="HOME" size="16" />
-                     </graphic>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </AnchorPane>
-   </children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
+      prefWidth="180.0" styleClass="main_menu_container" stylesheets="@../../../../Styles/PatientMenu.css"
+      xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PatientMenuController">
+   <AnchorPane prefHeight="730.0" prefWidth="160.0" styleClass="left_container">
+      <VBox prefHeight="80.0" prefWidth="160.0" styleClass="title_container" AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <FontAwesomeIconView glyphName="AMBULANCE" size="30"/>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Health Center"/>
+      </VBox>
+      <VBox prefHeight="400.0" prefWidth="160.0" styleClass="menu_container" AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <opaqueInsets>
+            <Insets/>
+         </opaqueInsets>
+         <Button fx:id="make_app_btn" mnemonicParsing="false" text="Make an Appoinment">
+            <graphic>
+               <FontAwesomeIconView glyphName="" size="20"/>
+            </graphic>
+         </Button>
+         <Button fx:id="show_app_btn" mnemonicParsing="false" text="My Appoinments">
+            <graphic>
+               <FontAwesomeIconView glyphName="ADDRESS_BOOK_ALT" size="20"/>
+            </graphic>
+         </Button>
+         <Line endX="150.0"/>
+         <Button fx:id="profile_btn" mnemonicParsing="false" styleClass="alt_menu_btn" text="Profile">
+            <graphic>
+               <FontAwesomeIconView glyphName="USER" size="20"/>
+            </graphic>
+         </Button>
+         <Button mnemonicParsing="false" styleClass="alt_menu_btn" text="Log Out">
+            <graphic>
+               <FontAwesomeIconView fx:id="logout_btn" glyphName="EXTERNAL_LINK" size="20"/>
+            </graphic>
+         </Button>
+      </VBox>
+      <VBox layoutX="10.0" layoutY="602.0" prefHeight="120.0" prefWidth="130.0" styleClass="reload_container"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Want to reload?"/>
+         <Label text="Use this to reload page."/>
+         <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="86.0" text="Reload">
+            <graphic>
+               <FontAwesomeIconView glyphName="HOME" size="16"/>
+            </graphic>
+         </Button>
+      </VBox>
+   </AnchorPane>
 </VBox>
