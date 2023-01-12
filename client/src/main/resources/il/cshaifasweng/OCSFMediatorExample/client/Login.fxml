@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -13,6 +14,11 @@
    <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container" stylesheets="@../../../../Styles/Login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
       <FontAwesomeIconView glyphName="AMBULANCE" size="30" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Health Center" />
+      <Button fx:id="Magnetic_Station_btn" mnemonicParsing="false" styleClass="login_container" text="Magnetic Station">
+         <VBox.margin>
+            <Insets top="70.0" />
+         </VBox.margin>
+      </Button>
    </VBox>
    <VBox layoutX="220.0" layoutY="25.0" prefHeight="350.0" prefWidth="350.0" styleClass="login_form_container" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
       <Label id="choice-prompt-text" text="Choose Your Account Type:" />
