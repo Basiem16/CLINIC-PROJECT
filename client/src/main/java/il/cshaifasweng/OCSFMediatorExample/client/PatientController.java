@@ -5,6 +5,8 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
+import javafx.event.ActionEvent;
 
 public class PatientController implements Initializable {
 
@@ -52,6 +55,37 @@ public class PatientController implements Initializable {
     @FXML // fx:id="time_selector"
     private ChoiceBox<?> time_selector; // Value injected by FXMLLoader
 
+    @FXML
+    void confirmAppointment(ActionEvent event) {
+
+    }
+
+    @FXML
+    void goToMakeAppPage(ActionEvent event) throws IOException {
+        App.setRoot("Patient");
+    }
+
+    @FXML
+    void goToMyAppsPage(ActionEvent event) throws IOException {
+        App.setRoot("PatientShowApp");
+    }
+
+    @FXML
+    void goToProfileInfo(ActionEvent event) throws IOException {
+        App.setRoot("PatientShowInfo");
+    }
+
+    @FXML
+    void refreshPage(ActionEvent event) throws IOException {
+        App.setRoot("Patient");
+    }
+
+    @FXML
+    void signOutFunction(ActionEvent event) throws IOException {
+        App.setRoot("Login");
+        SimpleClient.resetClient();
+    }
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert app_status_txt != null : "fx:id=\"app_status_txt\" was not injected: check your FXML file 'Patient.fxml'.";
@@ -69,6 +103,8 @@ public class PatientController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        SimpleClient.getClient().setCurrentUser(0);
+        hello_user_lbl.setText("Hello " + SimpleClient.getPatientClient().getName() + ",");
 
     }
 }

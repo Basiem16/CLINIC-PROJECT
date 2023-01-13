@@ -65,7 +65,9 @@ public class LoginController implements Initializable {
             }
             if (SimpleClient.getClient().logInFlag == 1 && acc_id_fld.getText().length() < 10) { // TODO change to == 9
                 if(SimpleClient.getClient().getAvailableUsers() < 1){ // error in available users
-                    SimpleClient.getClient().logInFlag = -1;
+                    if((acc_selector.getValue() == "Patient") && (SimpleClient.getPatientClient() != null)) {
+                        SimpleClient.getClient().logInFlag = -1;
+                    }
                 }else if(SimpleClient.getClient().getAvailableUsers() == 1){
                     App.setRoot("patient");
                     SimpleClient.getClient().setCurrentUser(0);

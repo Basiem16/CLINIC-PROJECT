@@ -5,15 +5,19 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
+import javafx.event.ActionEvent;
 
-public class PatientShowAppController {
+public class PatientShowAppController implements Initializable {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -63,6 +67,37 @@ public class PatientShowAppController {
     @FXML // fx:id="show_app_btn"
     private Button show_app_btn; // Value injected by FXMLLoader
 
+    @FXML
+    void confrimToCancelApp(ActionEvent event) {
+
+    }
+
+    @FXML
+    void goToMakeAppPage(ActionEvent event) throws IOException {
+        App.setRoot("Patient");
+    }
+
+    @FXML
+    void goToProfilePage(ActionEvent event) throws IOException {
+        App.setRoot("PatientShowInfo");
+    }
+
+    @FXML
+    void goToShowAppsPage(ActionEvent event) throws IOException {
+        App.setRoot("PatientShowApp");
+    }
+
+    @FXML
+    void logOutPage(ActionEvent event) throws IOException {
+        App.setRoot("Login");
+        SimpleClient.resetClient();
+    }
+
+    @FXML
+    void realodPage(ActionEvent event) throws IOException {
+        App.setRoot("Patient");
+    }
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert app_clinic_location != null : "fx:id=\"app_clinic_location\" was not injected: check your FXML file 'PatientShowApp.fxml'.";
@@ -82,5 +117,10 @@ public class PatientShowAppController {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        SimpleClient.getClient().setCurrentUser(0);
+        hello_user_lbl.setText("Hello " + SimpleClient.getPatientClient().getName() + ",");
+    }
 }
 
