@@ -1,16 +1,18 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import Models.Model;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class LoginController implements Initializable {
@@ -30,7 +32,7 @@ public class LoginController implements Initializable {
     private Label acc_id_lbl; // Value injected by FXMLLoader
 
     @FXML // fx:id="acc_selector"
-    private ChoiceBox<?> acc_selector; // Value injected by FXMLLoader
+    private ChoiceBox<String> acc_selector; // Value injected by FXMLLoader
 
     @FXML // fx:id="error_lbl"
     private Label error_lbl; // Value injected by FXMLLoader
@@ -44,13 +46,80 @@ public class LoginController implements Initializable {
     @FXML // fx:id="password_lbl"
     private Label password_lbl; // Value injected by FXMLLoader
 
+    private String[] people = {"Patient", "Doctor", "Nurse", "Manager"};
+
     @FXML
-    void signInFun(ActionEvent event) {
-        Model.getInstance().getViewFactory();
+    void signInFun(ActionEvent event) throws IOException {
+        /*Model.getInstance().getViewFactory();
         Model.getInstance().getViewFactory().showPatientWindow();
         ViewFactory viewFactory = new ViewFactory();
-        viewFactory.showLoginWindow();
+        viewFactory.showLoginWindow();*/
+        String regex = "[0-9]+";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(acc_id_fld.getText());
+        if (m.matches()) {
+            SimpleClient.getClient().LogIn(Integer.parseInt(acc_id_fld.getText()), password_fld.getText());
+            while (SimpleClient.getClient().logInFlag == -1) {
+                ProgressBar pb = new ProgressBar(0.6);
+                ProgressBar pi = new ProgressBar(0.6);
+            }
+            if (SimpleClient.getClient().logInFlag == 1 && acc_id_fld.getText().length() < 10) { // TODO change to == 9
+                if(SimpleClient.getClient().getAvailableUsers() < 1){ // error in available users
+                    SimpleClient.getClient().logInFlag = -1;
+                }else if(SimpleClient.getClient().getAvailableUsers() == 1){
+                    App.setRoot("patient");
+                    SimpleClient.getClient().setCurrentUser(0);
+                }else{
+                    if((acc_selector.getValue() == "Patient") && (SimpleClient.getPatientClient() != null))
+                        App.setRoot("Patient");
+                    else if((acc_selector.getValue() == "Doctor") && (SimpleClient.getDoctorClient() != null))
+                        App.setRoot("Doctor");
+                    else if((acc_selector.getValue() == "Nurse") && (SimpleClient.getNurseClient() != null))
+                        App.setRoot("Nurse");
+                    else if((acc_selector.getValue() == "Admin") && (SimpleClient.getManagerClient() != null))
+                        App.setRoot("Admin");
+                }
+            }
+            else if(SimpleClient.getClient().logInFlag == 3){
+                SimpleClient.getClient().logInFlag = -1;
+                acc_id_fld.setText("");
+                password_fld.setText("");
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR,
+                            String.format("User already active")
+                    );
+                    alert.show();
+                    error_lbl.setText("User already active");
+                });
+            } else {
+                password_fld.setText("");
+                SimpleClient.getClient().logInFlag = -1;
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR,
+                            String.format("Incorrect Id or Password, try again")
+                    );
+                    alert.show();
+                    error_lbl.setText("Invalid Id or Password, please try again!");
+                });
+            }
+        } else {
+            acc_id_fld.setText("");
+            password_fld.setText("");
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        String.format("ID should contain only numbers, try again")
+                );
+                alert.show();
+                error_lbl.setText("ID should only contain numbers, please try again!");
+            });
+        }
     }
+
+    @FXML
+    void magneticStationFun(ActionEvent event) throws IOException {
+        App.setRoot("MagneticStation"); // Open Magnetic Station in Clinic
+    }
+
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -67,6 +136,8 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        acc_selector.getItems().addAll(people);
+        //acc_selector.setItems(FXCollections.observableArrayList(Account));
     }
 }
 

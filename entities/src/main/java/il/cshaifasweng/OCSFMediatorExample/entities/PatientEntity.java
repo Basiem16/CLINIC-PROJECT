@@ -17,6 +17,9 @@ public class PatientEntity extends UserEntity{
     @JoinColumn(name = "clinic_id")
     private ClinicEntity clinic;
 
+    @OneToMany(mappedBy = "patient")
+    List<DoctorPatientEntity> doctorPatientEntities;
+
 
     @OneToMany (fetch = FetchType.LAZY, mappedBy = "patient")
     private List<AppointmentEntity> appointments;
@@ -27,17 +30,27 @@ public class PatientEntity extends UserEntity{
 
     public void setClinic(ClinicEntity clinic) {
         this.clinic = clinic;
+        clinic.getPatients().add(this);
     }
 
-    public PatientEntity(int id, String first_name, String family_name, String mail, String Password, ClinicEntity clinic) {
+    public PatientEntity(int id, String first_name, String family_name, String mail, String Password, ClinicEntity clinic) throws NoSuchAlgorithmException{
         super(id, first_name, family_name, mail, Password);
-        this.patient_id = id;
+        //this.patient_id = id;
         this.appointments = new ArrayList<AppointmentEntity>();
         this.clinic=clinic;
+        this.doctorPatientEntities = new ArrayList<DoctorPatientEntity>();
     }
 
     public PatientEntity() {
 
+    }
+
+    public List<DoctorPatientEntity> getDoctorPatientEntities() {
+        return doctorPatientEntities;
+    }
+
+    public void setDoctorPatientEntities(List<DoctorPatientEntity> doctorPatientEntities) {
+        this.doctorPatientEntities = doctorPatientEntities;
     }
 
     public int getPatient_id() {

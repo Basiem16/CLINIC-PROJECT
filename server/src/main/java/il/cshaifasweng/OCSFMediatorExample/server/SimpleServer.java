@@ -76,14 +76,20 @@ public class SimpleServer extends AbstractServer {
 			NurseEntity nurse4 = new NurseEntity(1234564578, "Nurse", "4", "Nurse4@gmail.com", "Nurse2123", clinic4);
 			session.save(nurse4);
 
+			ArrayList<String> times=new ArrayList<String>();
+			times.add("08:00-13:00");
+			times.add("08:00-13:00");
+			times.add("08:00-13:00");
+			times.add("08:00-13:00");
 
-			DoctorClinicEntity doctorClinic1 = new DoctorClinicEntity(doc1, clinic1);
+
+			DoctorClinicEntity doctorClinic1 = new DoctorClinicEntity(doc1, clinic1, times);
 			session.save(doctorClinic1);
-			DoctorClinicEntity doctorClinic2 = new DoctorClinicEntity(doc2, clinic2);
+			DoctorClinicEntity doctorClinic2 = new DoctorClinicEntity(doc2, clinic2, times);
 			session.save(doctorClinic2);
-			DoctorClinicEntity doctorClinic3 = new DoctorClinicEntity(doc3, clinic3);
+			DoctorClinicEntity doctorClinic3 = new DoctorClinicEntity(doc3, clinic3, times);
 			session.save(doctorClinic3);
-			DoctorClinicEntity doctorClinic4 = new DoctorClinicEntity(doc4, clinic4);
+			DoctorClinicEntity doctorClinic4 = new DoctorClinicEntity(doc4, clinic4, times);
 			session.save(doctorClinic4);
 
 

@@ -11,7 +11,7 @@ public class NurseEntity extends UserEntity{
     @Column(name = "Nurse_id")
     private int nurse_id;
 
-    @OneToOne (fetch = FetchType.LAZY)
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "clinic_id")
     private ClinicEntity clinic;
 

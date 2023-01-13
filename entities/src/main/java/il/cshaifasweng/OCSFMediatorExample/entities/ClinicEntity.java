@@ -27,8 +27,8 @@ public class ClinicEntity implements Serializable {
     @OneToMany(mappedBy = "clinic")
     private List<NurseEntity> nurses;
 
-    @OneToOne(mappedBy = "clinic")
-    private DoctorClinicEntity doctorClinicEntities;
+    @OneToMany(mappedBy = "clinic")
+    private List<DoctorClinicEntity> doctorClinicEntities;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "clinic")
     private List<AppointmentEntity> appointments;
@@ -50,7 +50,24 @@ public class ClinicEntity implements Serializable {
         this.name = name;
         this.open = open;
         this.close = close;
-        this.Patients = Patients;
+        this.Patients = new ArrayList<PatientEntity>();
+        this.nurses=new ArrayList<NurseEntity>();
+        this.doctorClinicEntities=new ArrayList<DoctorClinicEntity>();
+        this.appointments=new ArrayList<AppointmentEntity>();
+    }
+
+    public ClinicEntity(ClinicEntity CE) {
+        this.name = CE.name;
+        this.open = CE.open;
+        this.close = CE.close;
+        this.Patients=CE.Patients;
+        this.nurses= CE.nurses;
+        this.doctorClinicEntities=CE.doctorClinicEntities;
+        this.manager=CE.manager;
+    }
+
+    public ClinicEntity(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -105,11 +122,11 @@ public class ClinicEntity implements Serializable {
         this.nurses = nurses;
     }
 
-    public DoctorClinicEntity getDoctorClinicEntities() {
+    public List<DoctorClinicEntity> getDoctorClinicEntities() {
         return doctorClinicEntities;
     }
 
-    public void setDoctorClinicEntities(DoctorClinicEntity doctorClinicEntities) {
+    public void setDoctorClinicEntities(List<DoctorClinicEntity> doctorClinicEntities) {
         this.doctorClinicEntities = doctorClinicEntities;
     }
 

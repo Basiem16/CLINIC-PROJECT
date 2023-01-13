@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 
 import javax.persistence.*;
+import java.security.NoSuchAlgorithmException;
 
 @Entity
 @Table(name = "manager_entity")
@@ -17,9 +18,9 @@ public class ManagerEntity extends UserEntity{
     @JoinColumn(name = "clinic_id")
     private  ClinicEntity clinic;
 
-    public ManagerEntity(int id, String first_name, String family_name, String mail, String Password, ClinicEntity clinic) {
+    public ManagerEntity(int id, String first_name, String family_name, String mail, String Password, ClinicEntity clinic) throws NoSuchAlgorithmException {
         super(id, first_name, family_name, mail, Password);
-        this.manager_id = manager_id;
+        //this.manager_id = manager_id;
         setClinic(clinic);
     }
 

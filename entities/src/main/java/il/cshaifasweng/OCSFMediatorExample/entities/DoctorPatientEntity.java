@@ -24,6 +24,7 @@ public class DoctorPatientEntity implements Serializable {
 
     public void setPatient(PatientEntity patient) {
         this.patient = patient;
+        this.patient.getDoctorPatientEntities().add(this);
     }
 
     public DoctorEntity getDoctor(){

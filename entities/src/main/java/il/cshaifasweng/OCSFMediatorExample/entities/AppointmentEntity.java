@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Appointmens")
+@Table(name = "Appointments")
 public class AppointmentEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +41,26 @@ public class AppointmentEntity implements Serializable {
         this.clinic = clinic;
         this.patient = patient;
         this.doctor = doctor;
+    }
+
+    public AppointmentEntity(LocalDateTime date, DoctorClinicEntity doc_clinic,int duration)
+    {
+        this.date=date;
+        setClinic_app(doc_clinic.clinic);// TODO change tp set
+        setDoctor_app(doc_clinic.doctor); // TODO change tp set
+        this.reserved = false;
+        this.timeDuration = duration;
+    }
+
+    public AppointmentEntity(LocalDateTime actual_date,LocalDateTime date, ClinicEntity clinic,PatientEntity patient,NurseEntity nurse,boolean valid,int duration)
+    {
+        this.date=date;
+        this.clinic = clinic; // TODO change tp set
+        this.patient = patient; // TODO change tp set
+//        setNurse_app(nurse); // TODO change tp set
+        this.time=actual_date;
+        this.reserved = valid;
+        this.timeDuration = duration;
     }
 
     public int getId() {
@@ -106,5 +126,20 @@ public class AppointmentEntity implements Serializable {
 
     public void setClinic(ClinicEntity clinic) {
         this.clinic = clinic;
+    }
+
+    public void setClinic_app(ClinicEntity clinic) {
+        this.clinic = clinic;
+        clinic.getAppointments().add(this);
+    }
+
+    public void setPatient_app(PatientEntity patient) {
+        this.patient=patient;
+        patient.getAppointments().add(this);
+    }
+
+    public void setDoctor_app(DoctorEntity doctor) {
+        this.doctor=doctor;
+        doctor.getAppointments().add(this);
     }
 }

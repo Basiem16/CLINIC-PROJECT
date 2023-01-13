@@ -12,18 +12,29 @@ public class UserEntity {
     String mail;
     private String Password;
     boolean active;
+    private String Salt;
 
-    public UserEntity(int id, String first_name, String family_name, String mail,String Password)  {
+    public UserEntity(int id, String first_name, String family_name, String mail,String Password)  throws NoSuchAlgorithmException{
         this.id = id;
         this.first_name = first_name;
         this.family_name = family_name;
         this.mail = mail;
         this.Password = Password;
         active = false;
+        this.Salt = setSalt();
+        setPassword(Password);
     }
 
     public UserEntity() {
         this.active = false;
+    }
+
+
+    private String setSalt() throws NoSuchAlgorithmException {
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        byte[] salt = new byte[16];
+        sr.nextBytes(salt);
+        return salt.toString();
     }
 
     public int getId() {
@@ -63,7 +74,26 @@ public class UserEntity {
     }
 
     public void setPassword(String password) {
-        Password = password;
+        getSecurePassword(password,this.Salt);
+    }
+
+    private String getSecurePassword(String passwordToHash,
+                                     String salt) {
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt.getBytes());
+            byte[] bytes = md.digest(passwordToHash.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+                        .substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 
     public boolean isActive() {
@@ -76,7 +106,11 @@ public class UserEntity {
 
     public boolean comparePassword(String password)
     {
-        boolean check = password.compareTo(this.getPassword()) == 0;
+        String pass = getSecurePassword(password,this.Salt);
+        boolean check = pass.compareTo(this.getPassword()) == 0;
         return check;
+    }
+    public void setTmpPassword(String Password){
+        this.Password = Password;
     }
 }

@@ -26,7 +26,6 @@ public class DoctorEntity extends UserEntity{
     public DoctorEntity(int id, String first_name, String family_name, String mail, String Password) throws NoSuchAlgorithmException {
         super(id, first_name, family_name, mail, Password);
         initListAndSets();
-
     }
 
     private void initListAndSets(){
@@ -36,7 +35,7 @@ public class DoctorEntity extends UserEntity{
     }
 
     public DoctorEntity() {
-
+        initListAndSets();
     }
 
     public int getDoctor_id() {
@@ -69,5 +68,17 @@ public class DoctorEntity extends UserEntity{
 
     public void setAppointments(List<AppointmentEntity> appointments) {
         this.appointments = appointments;
+    }
+
+    public List<AppointmentEntity> getResevedAppointments() {
+        List<AppointmentEntity> reserved_Apps = new ArrayList<AppointmentEntity>();
+        for(AppointmentEntity app : this.appointments)
+        {
+            if(app.isReserved() && app.getPatient() != null)
+            {
+                reserved_Apps.add(app);
+            }
+        }
+        return reserved_Apps;
     }
 }

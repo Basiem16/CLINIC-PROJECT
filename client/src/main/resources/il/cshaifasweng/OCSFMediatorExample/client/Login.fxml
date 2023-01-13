@@ -14,7 +14,7 @@
    <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container" stylesheets="@../../../../Styles/Login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
       <FontAwesomeIconView glyphName="AMBULANCE" size="30" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Health Center" />
-      <Button fx:id="Magnetic_Station_btn" mnemonicParsing="false" styleClass="login_container" text="Magnetic Station">
+      <Button fx:id="Magnetic_Station_btn" mnemonicParsing="false" onAction="#magneticStationFun" styleClass="login_container" text="Magnetic Station">
          <VBox.margin>
             <Insets top="70.0" />
          </VBox.margin>
@@ -28,6 +28,6 @@
       <Label fx:id="password_lbl" text="Password:" />
       <TextField fx:id="password_fld" styleClass="input_field" />
       <Button fx:id="login_btn" mnemonicParsing="false" onAction="#signInFun" text="Log In" />
-      <Label fx:id="error_lbl" styleClass="error_lbl" text="Error:" />
+      <Label fx:id="error_lbl" styleClass="error_lbl" />
    </VBox>
 </AnchorPane>
