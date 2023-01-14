@@ -28,7 +28,7 @@
          <children>
             <Label fx:id="acc_id_lbl" text="Please insert magnetic card number:" />
             <TextField fx:id="magnetic_card_number_fld" styleClass="input_field" />
-            <Button fx:id="scan_btn" mnemonicParsing="false" onAction="#signInFun" text="SCAN CARD" />
+            <Button fx:id="scan_btn" mnemonicParsing="false" onAction="#Scanfun" text="SCAN CARD" />
          </children>
       </VBox>
       <Label alignment="CENTER" layoutX="217.0" layoutY="37.0" prefHeight="19.0" prefWidth="350.0" text="Welcome to our Clinics Magnetic Station">

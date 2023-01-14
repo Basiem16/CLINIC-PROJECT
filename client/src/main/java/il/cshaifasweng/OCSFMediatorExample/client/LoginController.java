@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +18,8 @@ import java.util.regex.Pattern;
 
 public class LoginController implements Initializable {
     @FXML // ResourceBundle that was given to the FXMLLoader
+
+    private SimpleClient client;
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
@@ -50,11 +53,41 @@ public class LoginController implements Initializable {
 
     @FXML
     public void signInFun(ActionEvent event) throws IOException {
+
+        try {
+            String user_name = acc_id_fld.getText();
+            String password = password_fld.getText();
+            if (user_name.equals("") && password != "")
+                error_lbl.setText("Please enter User name");
+            else if (password.equals("") && user_name != "")
+                error_lbl.setText("Please enter your password");
+            else if (user_name.equals("")&&password.equals(""))
+                     error_lbl.setText("Please enter user name and password");
+            else {
+                SimpleClient.setClientNull();
+                client= SimpleClient.getClient();
+                if(client==null)
+                    System.out.println("Where are u ?");
+                else {
+                    try {
+                        client.openConnection();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                try {
+                    #############$$$$$$$$$$$$$$$$$$$$$$$$$
+                }
+            }
+        }
+
+
+
         /*Model.getInstance().getViewFactory();
         Model.getInstance().getViewFactory().showPatientWindow();
         ViewFactory viewFactory = new ViewFactory();
         viewFactory.showLoginWindow();*/
-        String regex = "[0-9]+";
+      /*  String regex = "[0-9]+";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(acc_id_fld.getText());
         if (m.matches()) {
@@ -114,7 +147,7 @@ public class LoginController implements Initializable {
                 alert.show();
                 error_lbl.setText("ID should only contain numbers, please try again!");
             });
-        }
+        }*/
     }
 
     @FXML
@@ -139,6 +172,9 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         acc_selector.getItems().addAll(people);
+        EventBus.getDefault().register(this);
+        error_lbl.setVisible(false);
+
         //acc_selector.setItems(FXCollections.observableArrayList(Account));
     }
 }

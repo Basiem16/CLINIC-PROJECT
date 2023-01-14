@@ -36,7 +36,7 @@ public class MagneticStationController implements Initializable {
     private Button scan_btn; // Value injected by FXMLLoader
 
     @FXML
-    void signInFun(ActionEvent event) {
+    void Scanfun(ActionEvent event) {
 
     }
 
