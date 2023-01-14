@@ -49,7 +49,7 @@ public class LoginController implements Initializable {
     private String[] people = {"Patient", "Doctor", "Nurse", "Manager"};
 
     @FXML
-    void signInFun(ActionEvent event) throws IOException {
+    public void signInFun(ActionEvent event) throws IOException {
         /*Model.getInstance().getViewFactory();
         Model.getInstance().getViewFactory().showPatientWindow();
         ViewFactory viewFactory = new ViewFactory();

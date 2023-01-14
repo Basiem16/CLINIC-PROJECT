@@ -27,6 +27,7 @@ public class App extends Application {
     	EventBus.getDefault().register(this);
     	client = SimpleClient.getClient();
     	client.openConnection();
+        stage.setTitle("Health Center");
         scene = new Scene(loadFXML("Login"), 640, 480);
         stage.setScene(scene);
         stage.show();

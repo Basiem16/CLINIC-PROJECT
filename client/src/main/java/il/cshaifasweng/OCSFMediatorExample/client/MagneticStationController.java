@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
 public class MagneticStationController implements Initializable {
@@ -27,6 +28,10 @@ public class MagneticStationController implements Initializable {
     @FXML // fx:id="magnetic_card_number_fld"
     private TextField magnetic_card_number_fld; // Value injected by FXMLLoader
 
+
+    @FXML
+    private MenuButton choose_clinic_btn;
+
     @FXML // fx:id="scan_btn"
     private Button scan_btn; // Value injected by FXMLLoader
 
@@ -40,6 +45,7 @@ public class MagneticStationController implements Initializable {
         assert acc_id_lbl != null : "fx:id=\"acc_id_lbl\" was not injected: check your FXML file 'MagneticStation.fxml'.";
         assert magnetic_card_number_fld != null : "fx:id=\"magnetic_card_number_fld\" was not injected: check your FXML file 'MagneticStation.fxml'.";
         assert scan_btn != null : "fx:id=\"scan_btn\" was not injected: check your FXML file 'MagneticStation.fxml'.";
+        assert choose_clinic_btn != null : "fx:id=\"choose_clinic_btn\" was not injected: check your FXML file 'MagneticStation.fxml'.";
 
     }
 
