@@ -1,11 +1,12 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 @MappedSuperclass
-public class UserEntity {
+public class UserEntity implements Serializable {
     private int id;
     String first_name;
     String family_name;
@@ -13,15 +14,17 @@ public class UserEntity {
     private String Password;
     boolean active;
     private String Salt;
+    protected String Card_number;
 
-    public UserEntity(int id, String first_name, String family_name, String mail,String Password)  throws NoSuchAlgorithmException{
+    public UserEntity(int id, String first_name, String family_name, String mail,String Password, String Card_number)  throws NoSuchAlgorithmException{
         this.id = id;
         this.first_name = first_name;
         this.family_name = family_name;
         this.mail = mail;
         this.Password = Password;
-        active = false;
+        this.active = false;
         this.Salt = setSalt();
+        this.Card_number = Card_number;
         setPassword(Password);
     }
 
@@ -67,6 +70,14 @@ public class UserEntity {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getCard_number() {
+        return Card_number;
+    }
+
+    public void setCard_number(String card_number) {
+        Card_number = card_number;
     }
 
     public String getPassword() {

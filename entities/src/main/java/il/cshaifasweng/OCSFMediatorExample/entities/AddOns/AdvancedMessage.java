@@ -50,7 +50,7 @@ public class AdvancedMessage implements Serializable {
     /*-------Handling Employees-------*/
     private int employee_id;
     private String role;
-    private Employee employee;
+    private EmployeeEntity employee;
     private String employeeName;
     private List<DoctorEntity> employeeList;
     private ManagerEntity manager;
@@ -364,11 +364,11 @@ public class AdvancedMessage implements Serializable {
         this.role = role;
     }
 
-    public Employee getEmployee() {
+    public EmployeeEntity getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(EmployeeEntity employee) {
         this.employee = employee;
     }
 

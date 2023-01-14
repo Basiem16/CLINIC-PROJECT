@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 @Entity
 @Table(name = "Nurse")
-public class NurseEntity extends UserEntity{
+public class NurseEntity extends EmployeeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Nurse_id")

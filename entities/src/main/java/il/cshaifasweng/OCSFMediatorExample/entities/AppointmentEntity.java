@@ -15,6 +15,7 @@ public class AppointmentEntity implements Serializable {
     private LocalDateTime time; // time of appointment
     private boolean reserved = false;
     private int timeDuration;
+    protected EmployeeEntity Employee;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "clinic_id")
